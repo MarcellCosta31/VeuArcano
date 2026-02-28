@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Completar Perfil</title>
+  <link rel="stylesheet" href="/css/completar-perfil.css">
+</head>
+<body>
+
+  <div class="background"></div>
+
+  <div class="container">
+    <div class="card">
+
+      <h2>Complete seu Perfil</h2>
+
+      <div class="preview">
+        <img id="previewImg" src="https://via.placeholder.com/90">
+      </div>
+
+      <form id="perfilForm">
+
+        <div class="input-group">
+          <input type="text" id="username" required>
+          <label>Nome de usuário</label>
+        </div>
+
+        <div class="input-group">
+          <input type="url" id="fotoURL" required>
+          <label>Link da foto</label>
+        </div>
+
+        <div class="input-group">
+          <textarea id="descricao" required></textarea>
+          <label>Descrição</label>
+        </div>
+
+        <button type="submit" class="primary-btn">
+          Salvar Perfil
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+
+  <script type="module" src="../js/perfil.js"></script>
+</body>
+</html>

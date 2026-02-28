@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Véu Arcano</title>
+
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+  <canvas id="particles"></canvas>
+
+  <header class="topbar">
+    <div class="tabs">
+      <button class="tab active">Mestre</button>
+      <button class="tab">Jogador</button>
+    </div>
+    <div class="avatar"></div>
+  </header>
+
+  <main class="content">
+    <h1>Bem-vindo ao Véu Arcano</h1>
+    <p>Gerencie campanhas além do véu da realidade.</p>
+  </main>
+
+  <button class="fab">+</button>
+
+ <div class="modal">
+  <div class="modal-content" id="modalContent">
+    <h2>Criar Nova Campanha</h2>
+
+    <input type="text" id="campaignName" placeholder="Nome da campanha">
+
+    <textarea id="campaignDesc" placeholder="Descrição da campanha"></textarea>
+
+    <select id="campaignSystem">
+      <option value="">Selecione o sistema</option>
+      <option value="D&D 5e">D&D 5e</option>
+      <option value="Tormenta 20">Tormenta 20</option>
+      <option value="Call of Cthulhu">Call of Cthulhu</option>
+      <option value="Outro">Outro</option>
+    </select>
+
+    <div class="cover-preview-container">
+      <input type="url" id="campaignCover" placeholder="URL da imagem de capa">
+      <div class="cover-preview" id="coverPreview">
+        <img src="#" alt="Pré-visualização" id="previewImage" style="display: none;">
+        <span class="preview-placeholder" id="previewPlaceholder">🔮 Pré-visualização</span>
+      </div>
+    </div>
+
+    <button id="createCampaignBtn">Criar Campanha</button>
+  </div>
+</div>
+
+<!-- Modal do Jogador -->
+<div class="modal" id="modalJogador">
+  <div class="modal-content" id="modalJogadorContent">
+    <h2>Entrar em Campanha</h2>
+    <p style="color: var(--text-muted); margin-bottom: 20px;">Digite o código de convite fornecido pelo mestre</p>
+
+    <div class="codigo-container">
+      <input type="text" id="codigoConviteInput" placeholder="Ex: ABC12345" maxlength="8" style="text-transform: uppercase;">
+      <button id="buscarCampanhaBtn" class="btn-primary">🔍 Buscar Campanha</button>
+    </div>
+
+    <!-- Pré-visualização da Campanha -->
+    <div class="campanha-preview" id="campanhaPreview" style="display: none;">
+      <h3>Pré-visualização da Campanha</h3>
+      
+      <div class="preview-card">
+        <div class="preview-cover" id="previewCover">
+          <div class="preview-cover-placeholder" id="previewCoverPlaceholder">
+            🎲 Pré-visualização da Capa
+          </div>
+        </div>
+        
+        <div class="preview-info">
+          <h4 id="previewNome">Nome da Campanha</h4>
+          <span class="preview-system" id="previewSistema">Sistema</span>
+          <p id="previewDescricao">Descrição da campanha aparecerá aqui...</p>
+          
+          <div class="preview-mestre">
+            👤 Mestre: <span id="previewMestre">Nome do Mestre</span>
+          </div>
+          
+          <div class="preview-jogadores">
+            👥 <span id="previewJogadores">0</span> jogadores
+          </div>
+        </div>
+      </div>
+
+      <div class="preview-actions">
+        <button id="confirmarEntradaBtn" class="btn-success" disabled>✅ Entrar na Campanha</button>
+        <button id="cancelarPreviewBtn" class="btn-secondary">↩️ Voltar</button>
+      </div>
+    </div>
+
+    <!-- Loading e Erro -->
+    <div id="previewLoading" style="display: none; text-align: center; padding: 20px;">
+      <div class="loading-spinner"></div>
+      <p>Buscando campanha...</p>
+    </div>
+
+    <div id="previewError" style="display: none; text-align: center; padding: 20px; color: #ff6b6b;">
+      <p>❌ Campanha não encontrada!</p>
+      <small>Verifique o código e tente novamente.</small>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="./js/script.js"></script>
+</body>
+
+</html>

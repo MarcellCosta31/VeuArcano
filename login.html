@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Véu Arcano • Acesso</title>
+  <link rel="stylesheet" href="./css/login.css">
+</head>
+<body>
+
+  <div class="background"></div>
+
+  <div class="container">
+    <div class="card">
+
+      <h1 class="logo">Véu Arcano</h1>
+
+      <div class="tabs">
+        <button id="btnLogin" class="active">Login</button>
+        <button id="btnRegister">Cadastro</button>
+      </div>
+
+      <!-- LOGIN -->
+      <form id="loginForm" class="form active">
+        <div class="input-group">
+          <input type="email" required>
+          <label>Email</label>
+        </div>
+
+        <div class="input-group">
+          <input type="password" required>
+          <label>Senha</label>
+        </div>
+
+        <button type="submit" class="primary-btn">Entrar</button>
+      </form>
+
+      <!-- CADASTRO -->
+      <form id="registerForm" class="form">
+        <div class="input-group">
+          <input type="text" required>
+          <label>Nome</label>
+        </div>
+
+        <div class="input-group">
+          <input type="email" required>
+          <label>Email</label>
+        </div>
+
+        <div class="input-group">
+          <input type="password" required>
+          <label>Senha</label>
+        </div>
+
+        <button type="submit" class="primary-btn">Criar Conta</button>
+      </form>
+
+    </div>
+  </div>
+
+<script type="module" src="../js/login-page.js"></script>
+</body>
+</html>
