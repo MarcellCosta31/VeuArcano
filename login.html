@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Véu Arcano • Acesso</title>
+  <title>Véu Arcano • Cadastro</title>
   <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
@@ -22,41 +22,88 @@
       <!-- LOGIN -->
       <form id="loginForm" class="form active">
         <div class="input-group">
-          <input type="email" required>
+          <input type="email" id="loginEmail" required>
           <label>Email</label>
         </div>
 
         <div class="input-group">
-          <input type="password" required>
+          <input type="password" id="loginPassword" required>
           <label>Senha</label>
         </div>
 
         <button type="submit" class="primary-btn">Entrar</button>
       </form>
 
-      <!-- CADASTRO -->
-      <form id="registerForm" class="form">
-        <div class="input-group">
-          <input type="text" required>
-          <label>Nome</label>
+      <!-- CADASTRO COM ETAPAS -->
+      <div id="registerContainer" class="form">
+        
+        <!-- Indicador de etapas -->
+        <div class="steps-indicator">
+          <div class="step active" id="step1Indicator">
+            <span class="step-number">1</span>
+            <span class="step-label">Dados Básicos</span>
+          </div>
+          <div class="step-line"></div>
+          <div class="step" id="step2Indicator">
+            <span class="step-number">2</span>
+            <span class="step-label">Perfil</span>
+          </div>
         </div>
 
-        <div class="input-group">
-          <input type="email" required>
-          <label>Email</label>
-        </div>
+        <!-- ETAPA 1: Dados básicos -->
+        <form id="step1Form" class="step-form active">
+          <div class="input-group">
+            <input type="text" id="regNome" required>
+            <label>Nome completo</label>
+          </div>
 
-        <div class="input-group">
-          <input type="password" required>
-          <label>Senha</label>
-        </div>
+          <div class="input-group">
+            <input type="email" id="regEmail" required>
+            <label>Email</label>
+          </div>
 
-        <button type="submit" class="primary-btn">Criar Conta</button>
-      </form>
+          <div class="input-group">
+            <input type="password" id="regPassword" required>
+            <label>Senha</label>
+          </div>
+
+          <button type="button" id="goToStep2Btn" class="primary-btn">Próximo</button>
+        </form>
+
+        <!-- ETAPA 2: Perfil -->
+        <form id="step2Form" class="step-form">
+          <div class="perfil-section">
+            
+            <div class="preview">
+              <img id="previewImg" src="https://via.placeholder.com/90" alt="Preview">
+            </div>
+
+            <div class="input-group">
+              <input type="text" id="regUsername" required>
+              <label>Nome de usuário</label>
+            </div>
+
+            <div class="input-group">
+              <input type="url" id="regFotoURL" required>
+              <label>Link da foto (URL)</label>
+            </div>
+
+            <div class="input-group">
+              <textarea id="regDescricao" required></textarea>
+              <label>Descrição</label>
+            </div>
+          </div>
+
+          <div class="step-actions">
+            <button type="button" id="backToStep1Btn" class="secondary-btn">Voltar</button>
+            <button type="submit" id="completeRegisterBtn" class="primary-btn">Criar Conta</button>
+          </div>
+        </form>
+      </div>
 
     </div>
   </div>
 
-<script type="module" src="js/login-page.js"></script>
+  <script type="module" src="js/login-page.js"></script>
 </body>
 </html>
