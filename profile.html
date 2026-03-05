@@ -3,216 +3,127 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perfil Arcano - Véu Arcano</title>
+  <title>Meu Perfil - Véu Arcano</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="css/profile.css">
 </head>
 <body>
 
-  <!-- Canvas de Partículas (opcional) -->
+  <!-- Background místico -->
   <div class="background"></div>
 
-  <canvas id="particles"></canvas>
-
-  <!-- Topbar com navegação -->
+  <!-- Topbar simplificada -->
   <header class="topbar">
     <div class="logo">
-      <span class="logo-icon">🎲</span>
+      <span class="logo-icon">🔮</span>
       <span class="logo-text">Véu Arcano</span>
     </div>
-    <div class="topbar-nav">
-      <a href="dashboard.html" class="nav-link"><i class="fas fa-home"></i> Início</a>
-      <a href="campanhas.html" class="nav-link"><i class="fas fa-dragon"></i> Campanhas</a>
-      <a href="comunidade.html" class="nav-link"><i class="fas fa-users"></i> Comunidade</a>
-      <a href="profile.html" class="nav-link active"><i class="fas fa-user"></i> Perfil</a>
-    </div>
     <div class="topbar-actions">
-      <button class="icon-btn"><i class="fas fa-bell"></i></button>
-      <button class="icon-btn"><i class="fas fa-cog"></i></button>
+      <a href="dashboard.html" class="icon-btn"><i class="fas fa-home"></i></a>
+      <button class="icon-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i></button>
     </div>
   </header>
 
   <div class="profile-container">
     
-    <!-- CAPA DO PERFIL -->
-    <div class="profile-cover">
-      <div class="cover-image" id="coverImage">
-        <div class="cover-overlay"></div>
-        <button class="change-cover-btn" id="changeCoverBtn">
-          <i class="fas fa-camera"></i> Alterar Capa
-        </button>
-        <input type="file" id="coverInput" accept="image/*" hidden>
-      </div>
-      
-      <div class="profile-header">
-        <div class="profile-avatar-wrapper">
-          <img id="avatar" src="" alt="Avatar" class="profile-avatar">
+    <!-- CABEÇALHO DO PERFIL -->
+    <div class="profile-header">
+      <div class="profile-avatar-section">
+        <div class="avatar-wrapper">
+          <img id="profileAvatar" src="https://via.placeholder.com/120?text=🔮" alt="Avatar" class="profile-avatar">
           <button class="change-avatar-btn" id="changeAvatarBtn">
             <i class="fas fa-camera"></i>
           </button>
           <input type="file" id="avatarInput" accept="image/*" hidden>
         </div>
         
-        <div class="profile-info-header">
+        <div class="profile-info">
           <h1 id="displayName">Carregando...</h1>
-          <p class="profile-username" id="username">@usuario</p>
-          <p class="profile-bio" id="displayBio">Aventureiro pronto para novas jornadas</p>
-          
-          <div class="profile-stats-header">
-            <div class="stat-item">
-              <span class="stat-value" id="campanhasCount">0</span>
-              <span class="stat-label">Campanhas</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-value" id="sessoesCount">0</span>
-              <span class="stat-label">Sessões</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-value" id="seguidoresCount">0</span>
-              <span class="stat-label">Seguidores</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-value" id="seguindoCount">0</span>
-              <span class="stat-label">Seguindo</span>
-            </div>
-          </div>
+          <p class="profile-username" id="displayUsername">@carregando</p>
+          <p class="profile-bio" id="displayBio">Clique em editar para adicionar uma biografia</p>
         </div>
-        
-        <button class="edit-profile-btn" id="editProfileBtn">
-          <i class="fas fa-pen"></i> Editar Perfil
-        </button>
+      </div>
+
+      <button class="edit-profile-btn" id="editProfileBtn">
+        <i class="fas fa-pen"></i> Editar Perfil
+      </button>
+    </div>
+
+    <!-- STATS SIMPLES -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <i class="fas fa-dragon"></i>
+        <span class="stat-value" id="campanhasCount">0</span>
+        <span class="stat-label">Campanhas</span>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-calendar-alt"></i>
+        <span class="stat-value" id="sessoesCount">0</span>
+        <span class="stat-label">Sessões</span>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-users"></i>
+        <span class="stat-value" id="seguidoresCount">0</span>
+        <span class="stat-label">Seguidores</span>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-user-plus"></i>
+        <span class="stat-value" id="seguindoCount">0</span>
+        <span class="stat-label">Seguindo</span>
       </div>
     </div>
 
-    <!-- CONTEÚDO PRINCIPAL -->
-    <div class="profile-content">
+    <!-- INFORMAÇÕES DA CONTA -->
+    <div class="info-card">
+      <h2><i class="fas fa-user-circle"></i> Informações da Conta</h2>
       
-      <!-- SIDEBAR ESQUERDA -->
-      <div class="profile-sidebar">
+      <div class="info-grid">
+        <div class="info-row">
+          <span class="info-label"><i class="fas fa-envelope"></i> Email:</span>
+          <span class="info-value" id="displayEmail">carregando@email.com</span>
+        </div>
         
-        <div class="sidebar-card">
-          <h3><i class="fas fa-info-circle"></i> Informações</h3>
-          <div class="info-item">
-            <i class="fas fa-calendar-alt"></i>
-            <span>Membro desde <span id="membroDesde">2024</span></span>
-          </div>
-          <div class="info-item">
-            <i class="fas fa-map-marker-alt"></i>
-            <span id="localizacao">Reino Mágico</span>
-          </div>
-          <div class="info-item">
-            <i class="fas fa-gamepad"></i>
-            <span>Sistema favorito: <span id="sistemaFavorito">D&D 5e</span></span>
-          </div>
-          <div class="info-item">
-            <i class="fas fa-trophy"></i>
-            <span>Nível <span id="nivelUsuario">10</span> - Mestre Experiente</span>
-          </div>
+        <div class="info-row">
+          <span class="info-label"><i class="fas fa-calendar-alt"></i> Membro desde:</span>
+          <span class="info-value" id="displayMembroDesde">2024</span>
         </div>
-
-        <div class="sidebar-card">
-          <h3><i class="fas fa-medal"></i> Conquistas</h3>
-          <div class="conquistas-grid" id="conquistasContainer">
-            <!-- Conquistas serão inseridas aqui via JS -->
-          </div>
+        
+        <div class="info-row">
+          <span class="info-label"><i class="fas fa-tag"></i> Tipo de conta:</span>
+          <span class="info-value" id="displayTipoConta">Jogador</span>
         </div>
-
-        <div class="sidebar-card">
-          <h3><i class="fas fa-scroll"></i> Personagens Recentes</h3>
-          <div class="personagens-list" id="personagensRecentes">
-            <!-- Personagens serão inseridos aqui via JS -->
-          </div>
+        
+        <div class="info-row">
+          <span class="info-label"><i class="fas fa-shield-alt"></i> Status:</span>
+          <span class="info-value status-active"><i class="fas fa-circle"></i> Ativo</span>
         </div>
-
       </div>
+    </div>
 
-      <!-- ÁREA PRINCIPAL (FEED) -->
-      <div class="profile-main">
+    <!-- AÇÕES DA CONTA -->
+    <div class="actions-card">
+      <h2><i class="fas fa-cog"></i> Configurações da Conta</h2>
+      
+      <div class="actions-grid">
+        <button class="action-btn" id="changePasswordBtn">
+          <i class="fas fa-key"></i>
+          <span>Alterar Senha</span>
+        </button>
         
-        <!-- TABS -->
-        <div class="profile-tabs">
-          <button class="tab-btn active" data-tab="feed"><i class="fas fa-stream"></i> Feed</button>
-          <button class="tab-btn" data-tab="campanhas"><i class="fas fa-dragon"></i> Campanhas</button>
-          <button class="tab-btn" data-tab="personagens"><i class="fas fa-user-circle"></i> Personagens</button>
-          <button class="tab-btn" data-tab="sobre"><i class="fas fa-address-card"></i> Sobre</button>
-        </div>
-
-        <!-- TAB FEED -->
-        <div class="tab-content active" id="feed-tab">
-          <div class="create-post">
-            <img id="postAvatar" src="" alt="Avatar" class="post-avatar">
-            <input type="text" placeholder="Compartilhe algo sobre suas aventuras..." class="post-input">
-            <button class="post-btn"><i class="fas fa-paper-plane"></i></button>
-          </div>
-
-          <div class="feed-posts" id="feedContainer">
-            <!-- Posts serão inseridos aqui -->
-            <div class="post-card">
-              <div class="post-header">
-                <img src="" alt="Avatar" class="post-avatar-small">
-                <div>
-                  <h4>Nome do Jogador</h4>
-                  <small>Há 2 horas</small>
-                </div>
-              </div>
-              <p>Começando uma nova campanha de D&D 5e! Alguém interessado?</p>
-              <div class="post-stats">
-                <span><i class="far fa-heart"></i> 12</span>
-                <span><i class="far fa-comment"></i> 3</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- TAB CAMPANHAS -->
-        <div class="tab-content" id="campanhas-tab">
-          <div class="campanhas-grid-small" id="campanhasContainer">
-            <!-- Campanhas serão inseridas aqui -->
-          </div>
-        </div>
-
-        <!-- TAB PERSONAGENS -->
-        <div class="tab-content" id="personagens-tab">
-          <div class="personagens-grid" id="personagensContainer">
-            <!-- Personagens serão inseridos aqui -->
-          </div>
-        </div>
-
-        <!-- TAB SOBRE -->
-        <div class="tab-content" id="sobre-tab">
-          <div class="sobre-container">
-            <h3>Biografia</h3>
-            <p id="bioCompleta">Carregando...</p>
-
-            <h3>Sistemas Favoritos</h3>
-            <div class="sistemas-tags" id="sistemasContainer">
-              <span class="tag">D&D 5e</span>
-              <span class="tag">Tormenta20</span>
-              <span class="tag">Call of Cthulhu</span>
-            </div>
-
-            <h3>Estatísticas</h3>
-            <div class="estatisticas-grid">
-              <div class="estatistica-item">
-                <span class="estatistica-valor" id="totalSessoes">0</span>
-                <span>Sessões Mestradas</span>
-              </div>
-              <div class="estatistica-item">
-                <span class="estatistica-valor" id="totalJogadores">0</span>
-                <span>Jogadores</span>
-              </div>
-              <div class="estatistica-item">
-                <span class="estatistica-valor" id="totalNPCs">0</span>
-                <span>NPCs Criados</span>
-              </div>
-              <div class="estatistica-item">
-                <span class="estatistica-valor" id="totalHoras">0</span>
-                <span>Horas de Jogo</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
+        <button class="action-btn" id="changeEmailBtn">
+          <i class="fas fa-envelope"></i>
+          <span>Alterar Email</span>
+        </button>
+        
+        <button class="action-btn" id="changeUsernameBtn">
+          <i class="fas fa-user-edit"></i>
+          <span>Alterar Username</span>
+        </button>
+        
+        <button class="action-btn danger" id="deleteAccountBtn">
+          <i class="fas fa-trash-alt"></i>
+          <span>Apagar Conta</span>
+        </button>
       </div>
     </div>
   </div>
@@ -220,53 +131,67 @@
   <!-- MODAL DE EDIÇÃO -->
   <div class="modal" id="editModal">
     <div class="modal-content">
-      <h2><i class="fas fa-pen"></i> Editar Perfil</h2>
+      <h2 id="modalTitle"><i class="fas fa-pen"></i> Editar Perfil</h2>
       
-      <div class="form-group">
-        <label>Nome</label>
-        <input type="text" id="editName" placeholder="Seu nome">
-      </div>
-
-      <div class="form-group">
-        <label>Nome de usuário</label>
-        <input type="text" id="editUsername" placeholder="@usuario">
-      </div>
-
-      <div class="form-group">
-        <label>Bio</label>
-        <textarea id="editBio" placeholder="Conte um pouco sobre você..." rows="3"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>Localização</label>
-        <input type="text" id="editLocalizacao" placeholder="Cidade, Estado">
-      </div>
-
-      <div class="form-group">
-        <label>Sistema Favorito</label>
-        <select id="editSistemaFavorito">
-          <option value="D&D 5e">D&D 5e</option>
-          <option value="Tormenta 20">Tormenta 20</option>
-          <option value="Call of Cthulhu">Call of Cthulhu</option>
-          <option value="Pathfinder">Pathfinder</option>
-          <option value="Outro">Outro</option>
-        </select>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group half">
-          <label>Nível</label>
-          <input type="number" id="editNivel" min="1" max="100">
+      <form id="editForm">
+        <div class="form-group" id="editNameGroup">
+          <label><i class="fas fa-user"></i> Nome</label>
+          <input type="text" id="editName" placeholder="Seu nome">
         </div>
-        <div class="form-group half">
-          <label>Título</label>
-          <input type="text" id="editTitulo" placeholder="Ex: Mestre Experiente">
-        </div>
-      </div>
 
+        <div class="form-group" id="editUsernameGroup">
+          <label><i class="fas fa-at"></i> Nome de usuário</label>
+          <input type="text" id="editUsername" placeholder="@usuario">
+        </div>
+
+        <div class="form-group" id="editEmailGroup">
+          <label><i class="fas fa-envelope"></i> Email</label>
+          <input type="email" id="editEmail" placeholder="seu@email.com">
+        </div>
+
+        <div class="form-group" id="editPasswordGroup">
+          <label><i class="fas fa-key"></i> Senha atual</label>
+          <input type="password" id="editCurrentPassword" placeholder="Sua senha atual">
+        </div>
+
+        <div class="form-group" id="editNewPasswordGroup">
+          <label><i class="fas fa-key"></i> Nova senha</label>
+          <input type="password" id="editNewPassword" placeholder="Nova senha">
+        </div>
+
+        <div class="form-group" id="editConfirmPasswordGroup">
+          <label><i class="fas fa-key"></i> Confirmar nova senha</label>
+          <input type="password" id="editConfirmPassword" placeholder="Confirme a nova senha">
+        </div>
+
+        <div class="form-group" id="editBioGroup">
+          <label><i class="fas fa-align-left"></i> Biografia</label>
+          <textarea id="editBio" placeholder="Conte um pouco sobre você..." rows="3"></textarea>
+        </div>
+
+        <div class="form-group" id="editDeleteConfirmGroup" style="display: none;">
+          <label><i class="fas fa-exclamation-triangle"></i> Confirme a exclusão</label>
+          <input type="text" id="editDeleteConfirm" placeholder="Digite 'APAGAR' para confirmar">
+          <small class="warning-text">Esta ação não pode ser desfeita!</small>
+        </div>
+
+        <div class="modal-actions">
+          <button type="submit" class="btn-primary" id="modalSubmitBtn">Salvar</button>
+          <button type="button" class="btn-secondary" id="cancelEditBtn">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL DE CONFIRMAÇÃO -->
+  <div class="modal" id="confirmModal">
+    <div class="modal-content confirm-modal">
+      <h2><i class="fas fa-exclamation-triangle"></i> Confirmar Ação</h2>
+      <p id="confirmMessage">Tem certeza que deseja realizar esta ação?</p>
+      
       <div class="modal-actions">
-        <button class="btn-primary" id="saveProfileBtn"><i class="fas fa-save"></i> Salvar</button>
-        <button class="btn-secondary" id="cancelEditBtn"><i class="fas fa-times"></i> Cancelar</button>
+        <button class="btn-primary danger" id="confirmActionBtn">Confirmar</button>
+        <button class="btn-secondary" id="cancelConfirmBtn">Cancelar</button>
       </div>
     </div>
   </div>
