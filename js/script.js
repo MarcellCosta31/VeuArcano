@@ -89,7 +89,7 @@ onAuthStateChanged(auth, async (user) => {
       // Carregar dados do usuário do Firestore
       await carregarDadosUsuario(user);
       
-      // Carregar avatar do usuário
+      // Carregar avatar do usuário (CORRIGIDO)
       await carregarAvatar(user);
       
       // AGORA sim, carregar campanhas (com um pequeno delay para garantir)
@@ -133,24 +133,87 @@ async function carregarDadosUsuario(user) {
     if (userDoc.exists()) {
       userData = userDoc.data();
       console.log("📋 Dados do usuário:", userData);
+    } else {
+      console.log("⚠️ Documento do usuário não encontrado no Firestore");
+      userData = {
+        nome: user.displayName || user.email?.split('@')[0] || "Aventureiro",
+        email: user.email,
+        foto: user.photoURL || null
+      };
     }
   } catch (error) {
     console.error("Erro ao carregar dados do usuário:", error);
   }
 }
 
+/* ================= CARREGAR AVATAR ================= */
 async function carregarAvatar(user) {
   const avatar = document.querySelector(".avatar");
+  if (!avatar) return;
   
   try {
-    if (userData?.photoURL) {
-      avatar.style.backgroundImage = `url(${userData.photoURL})`;
-      avatar.style.backgroundSize = "cover";
-      avatar.style.backgroundPosition = "center";
+    // Prioridade: 
+    // 1. Foto do Firestore (campo 'foto')
+    // 2. PhotoURL do Auth
+    // 3. Placeholder padrão
+    
+    let fotoUrl = null;
+    
+    if (userData?.foto) {
+      // Campo 'foto' do Firestore (como na sua estrutura)
+      fotoUrl = userData.foto;
+      console.log("📸 Usando foto do Firestore:", fotoUrl.substring(0, 50) + "...");
+    } else if (user.photoURL) {
+      // PhotoURL do Auth
+      fotoUrl = user.photoURL;
+      console.log("📸 Usando photoURL do Auth");
+    }
+    
+    if (fotoUrl) {
+      // Testar se a imagem carrega
+      const img = new Image();
+      img.onload = () => {
+        avatar.style.backgroundImage = `url('${fotoUrl}')`;
+        avatar.style.backgroundSize = "cover";
+        avatar.style.backgroundPosition = "center";
+        avatar.style.backgroundColor = "transparent";
+        console.log("✅ Avatar carregado com sucesso");
+      };
+      img.onerror = () => {
+        console.log("⚠️ Erro ao carregar imagem, usando placeholder");
+        usarPlaceholderAvatar(avatar, user);
+      };
+      img.src = fotoUrl;
+    } else {
+      console.log("ℹ️ Nenhuma foto encontrada, usando placeholder");
+      usarPlaceholderAvatar(avatar, user);
     }
   } catch (error) {
     console.error("Erro ao carregar avatar:", error);
+    usarPlaceholderAvatar(avatar, user);
   }
+}
+
+// Função auxiliar para placeholder do avatar
+function usarPlaceholderAvatar(avatar, user) {
+  // Usar iniciais do nome como fallback
+  const nome = userData?.nome || user.displayName || user.email || "U";
+  const iniciais = nome
+    .split(' ')
+    .map(p => p[0])
+    .join('')
+    .toUpperCase()
+    .substring(0, 2);
+  
+  avatar.style.backgroundImage = 'none';
+  avatar.style.backgroundColor = '#4B1FD3';
+  avatar.style.display = 'flex';
+  avatar.style.alignItems = 'center';
+  avatar.style.justifyContent = 'center';
+  avatar.style.fontSize = '24px';
+  avatar.style.fontWeight = 'bold';
+  avatar.style.color = 'white';
+  avatar.textContent = iniciais;
 }
 
 /* ================= CARREGAR CAMPANHAS ================= */
