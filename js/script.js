@@ -965,11 +965,7 @@ function criarCardCampanha(campaign) {
 /* ================= FUNÇÕES DE AÇÃO ================= */
 
 window.abrirCampanha = function(campaignId) {
-  const campaign = campaigns.find(c => c.id === campaignId);
-  if (campaign) {
-    // Versão temporária enquanto a página não existe
-    alert(`🔮 Abrindo campanha: ${campaign.nome}\n\nEsta funcionalidade será implementada em breve!`);
-  }
+  window.location.href = `campaign.html?id=${campaignId}`;
 };
 
 window.verCodigoConvite = function(campaignId) {

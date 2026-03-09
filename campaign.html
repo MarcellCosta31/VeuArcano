@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mesa da Campanha</title>
+
+<link rel="stylesheet" href="css/campaign.css">
+
+</head>
+
+<body>
+
+<header class="campaign-topbar">
+
+<button class="settings-btn">⚙</button>
+
+</header>
+
+<!-- BANNER -->
+
+<section class="campaign-banner">
+
+<img id="bannerImg">
+
+<div class="banner-overlay">
+<h1 id="campaignName">Nome da Campanha</h1>
+</div>
+
+</section>
+
+<!-- PERSONAGENS -->
+
+<section class="characters">
+
+<h2>Personagens</h2>
+
+<div class="characters-container">
+
+<div class="character-card">
+<div class="character-avatar"></div>
+<span>Nome do Personagem</span>
+</div>
+
+<div class="character-add">
++
+</div>
+
+</div>
+
+</section>
+
+<!-- MESA -->
+
+<section class="table-area">
+
+<div class="initiative">
+
+<h3>Iniciativa</h3>
+
+<div class="initiative-list">
+<p>Nenhuma iniciativa ainda</p>
+</div>
+
+<button class="btn-add">+ Adicionar</button>
+
+</div>
+
+<div class="dice">
+
+<h3>Rolagem de Dados</h3>
+
+<div class="dice-buttons">
+
+<button data-dice="4">d4</button>
+<button data-dice="6">d6</button>
+<button data-dice="8">d8</button>
+<button data-dice="10">d10</button>
+<button data-dice="12">d12</button>
+<button data-dice="20">d20</button>
+
+</div>
+
+<div class="dice-result">
+?
+</div>
+
+</div>
+
+</section>
+
+<!-- CENAS -->
+
+<section class="scenes">
+
+<h2>Cenas</h2>
+
+<div class="scene-list">
+
+<div class="scene-card">
+Cena atual aparecerá aqui
+</div>
+
+</div>
+
+</section>
+
+<script type="module" src="js/campaign.js"></script>
+
+</body>
+</html>
